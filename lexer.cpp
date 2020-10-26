@@ -134,6 +134,13 @@ std::vector<Lex> parseCode(std::istream& symbol)
 				state = LexemType::H;
 				continue;
 			}
+			else if(c == '+' || c == '-' || c == '/' || c == '*')
+			{
+				lexems.push_back(Lex(line_num, LexemType::ID, buff));
+				state = LexemType::H;
+				dot = false;
+				continue;
+			}
 			else if (isSpace(c))
 			{
 				if (isKeywords(buff))
@@ -278,6 +285,12 @@ std::vector<Lex> parseCode(std::istream& symbol)
 				dot = false;
 			}
 			else if (c == ';')
+			{
+				lexems.push_back(Lex(line_num, LexemType::NUM, buff));
+				state = LexemType::H;
+				dot = false;
+				continue;
+			}else if(c == '+' || c == '-' || c == '/' || c == '*')
 			{
 				lexems.push_back(Lex(line_num, LexemType::NUM, buff));
 				state = LexemType::H;

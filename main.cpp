@@ -14,7 +14,7 @@ void printLexems(std::vector<Lex> lexems)
 void saveresul(const std::string& name, std::vector<Lex> lexems)
 {
 	std::ofstream file(name);
-	file << "\"¹\",\"type\",\"text\"" << std::endl;
+	file << "\"line\",\"type\",\"value\"" << std::endl;
 	for (auto k : lexems)
 	{
 		file << "\"" << k.m_line << "\",\"" << k.m_value << "\",\"" << lexIdToName[k.m_type] << "\"" << std::endl;
@@ -24,7 +24,7 @@ void saveresul(const std::string& name, std::vector<Lex> lexems)
 
 int main()
 {
-	std::ifstream numbersFile("test.txt");
+	std::ifstream numbersFile("testNumber.txt");
 	std::vector<Lex> lexerResult = parseCode(numbersFile);
 	printLexems(lexerResult);
 	saveresul("result.csv", lexerResult);
