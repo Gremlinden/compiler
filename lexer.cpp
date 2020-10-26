@@ -34,7 +34,7 @@ Lex::Lex(int line, LexemType type, std::string value)
 	m_value = value;
 }
 
-std::vector<Lex> parseCode(std::istream& code)
+std::vector<Lex> parseCode(std::istream& symbol)
 {
 	std::vector<Lex> lexems;
 	std::string buff;
@@ -45,7 +45,7 @@ std::vector<Lex> parseCode(std::istream& code)
 	int line_num = 1;
 	bool dot = false;
 	bool e = false;
-	char c = code.get();
+	char c = symbol.get();
 	bool Finished = false;
 	bool LastStep = false;
 	while (!Finished)
@@ -158,7 +158,6 @@ std::vector<Lex> parseCode(std::istream& code)
 					if (isdigit(c))
 					{
 						buff += c;
-
 					}
 					else if (c == '+' || c == '-')
 					{
@@ -297,7 +296,6 @@ std::vector<Lex> parseCode(std::istream& code)
 				buff += c;
 				lexems.push_back(Lex(line_num, LexemType::OPERATOR, buff));
 				state = LexemType::H;
-
 			}
 			else if (isdigit(c) || c == '.')
 			{
@@ -310,7 +308,6 @@ std::vector<Lex> parseCode(std::istream& code)
 				lexems.push_back(Lex(line_num, LexemType::OPERATOR, buff));
 				state = LexemType::H;
 				continue;
-
 			}
 			break;
 		case MINUS:
@@ -343,8 +340,8 @@ std::vector<Lex> parseCode(std::istream& code)
 		}
 		else
 		{
-			c = code.get();
-			if (code.eof())
+			c = symbol.get();
+			if (symbol.eof())
 			{
 				c = '\n';
 				LastStep = true;

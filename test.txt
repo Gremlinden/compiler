@@ -1,11 +1,9 @@
-+&
-a%a%
 -22.992;
 -22.992e-1;
 int double short long char
 a = 35482;
 c = 39.999;
-a_131vds;
+_a_131;
  _a;
 * / % & ~  ! + -
 ++g;
