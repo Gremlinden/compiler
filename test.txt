@@ -1,3 +1,5 @@
++&
+a%a%
 -22.992;
 -22.992e-1;
 int double short long char

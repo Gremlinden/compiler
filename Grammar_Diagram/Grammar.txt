@@ -1,0 +1,61 @@
+stats ::= stats stat
+
+|
+
+;
+
+stat ::= assignment_exp ‘;’
+
+| { stats }
+
+;
+
+assignment_exp ::= VAR ‘=’ additive_exp ;
+
+additive_exp ::= mult_exp
+
+| additive_exp '+' mult_exp
+
+| additive_exp '-' mult_exp
+
+;
+
+mult_exp ::= cast_exp
+
+| mult_exp '*' cast_exp
+
+| mult_exp '/' cast_exp
+
+| mult_exp '%' cast_exp
+
+;
+
+cast_exp ::= unary_exp
+
+| '(' type_name ')' cast_exp
+
+;
+
+unary_exp ::= VAR
+
+| INT
+
+| FLOAT
+
+| '++' unary_exp
+
+| '--' unary_exp
+
+| unary_operator cast_exp
+
+;
+
+unary_operator ::= '&' | '*' | '+' | '-' | '~' | '!' ;
+
+type_name ::= ‘int’ | ‘double’ | ‘char’ | ‘long’ | ‘short’ ;
+
+VAR ::= идентификатор
+
+INT ::= целое число
+
+FLOAT ::= вещественное число

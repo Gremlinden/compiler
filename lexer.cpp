@@ -2,7 +2,7 @@
 
 const std::set<std::string>keywords = { "int", "double", "char", "long", "short" };
 const std::set<char> space = { ' ', '\n', '\t', '\0', '\r' };
-const std::set<char> asgn = { '*', '/', '%', '&', '~' , '!' };
+const std::set<char> operatr = {'=', '*', '/', '%', '&', '~' , '!' };
 const std::set<char> deli = { ';', '(', ')' };
 const std::set<char> es = { 'e', 'E' };
 
@@ -14,9 +14,9 @@ bool isKeywords(std::string& c)
 {
 	return keywords.count(c);
 }
-bool isAsgn(char c)
+bool isOperatr(char c)
 {
-	return asgn.count(c);
+	return operatr.count(c);
 }
 bool isDeli(char c)
 {
@@ -71,12 +71,6 @@ std::vector<Lex> parseCode(std::istream& code)
 				lexems.push_back(Lex(line_num, LexemType::DELIM, buff));
 				state = LexemType::H;
 			}
-			else if (c == '=')
-			{
-				buff = c;
-				lexems.push_back(Lex(line_num, LexemType::ASGN, buff));
-				state = LexemType::H;
-			}
 			else if (c == '+')
 			{
 				buff = c;
@@ -87,7 +81,7 @@ std::vector<Lex> parseCode(std::istream& code)
 				buff = c;
 				state = LexemType::MINUS;
 			}
-			else if (isAsgn(c))
+			else if (isOperatr(c))
 			{
 				buff = c;
 				lexems.push_back(Lex(line_num, LexemType::OPERATOR, buff));
@@ -305,17 +299,11 @@ std::vector<Lex> parseCode(std::istream& code)
 				state = LexemType::H;
 
 			}
-			else if (isdigit(c))
+			else if (isdigit(c) || c == '.')
 			{
 				lexems.push_back(Lex(line_num, LexemType::OPERATOR, buff));
-				buff = c;
-				state = LexemType::NUM;
-			}
-			else if (c == '.')
-			{
-				lexems.push_back(Lex(line_num, LexemType::OPERATOR, buff));
-				buff = c;
-				state = LexemType::NUM;
+				state = LexemType::H;
+				continue;
 			}
 			else
 			{
@@ -332,17 +320,11 @@ std::vector<Lex> parseCode(std::istream& code)
 				lexems.push_back(Lex(line_num, LexemType::OPERATOR, buff));
 				state = LexemType::H;
 			}
-			else if (isdigit(c))
+			else if (isdigit(c) || c == '.')
 			{
 				lexems.push_back(Lex(line_num, LexemType::OPERATOR, buff));
-				buff = c;
-				state = LexemType::NUM;
-			}
-			else if (c == '.')
-			{
-				lexems.push_back(Lex(line_num, LexemType::OPERATOR, buff));
-				buff = c;
-				state = LexemType::NUM;
+				state = LexemType::H;
+				continue;
 			}
 			else
 			{

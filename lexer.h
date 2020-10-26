@@ -14,9 +14,7 @@ enum LexemType
 	ERROR,
 	KEYWORD,
 	NUM,
-	ASGN,
 	DELIM,
-	DIVIDE,
 	OPERATOR,
 	PLUS,
 	MINUS,
@@ -34,7 +32,6 @@ static std::map<LexemType, std::string> lexIdToName = {
 {LexemType::ERROR, "ERROR"},
 {LexemType::KEYWORD, "Keyword"},
 {LexemType::NUM, "Number"},
-{LexemType::ASGN, "Assignator"},
 {LexemType::DELIM, "Delimiter"},
 {LexemType::OPERATOR, "Operator"} };
 
